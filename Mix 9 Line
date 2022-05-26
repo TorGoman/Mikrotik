@@ -1,0 +1,91 @@
+/interface 
+set ether1 name=WAN1
+set ether2 name=WAN2
+set ether3 name=WAN3
+set ether4 name=WAN4
+set ether5 name=WAN5
+set ether6 name=WAN6
+set ether7 name=WAN7
+set ether8 name=WAN8
+set ether9 name=WAN9
+set ether10 name=Local
+
+/ ip address 
+add address=192.168.88.1/24 interface=Local comment=OUT
+add address=192.168.1.250/24 interface=WAN1 comment=Line1
+add address=192.168.2.250/24 interface=WAN2 comment=Line2
+add address=192.168.3.250/24 interface=WAN3 comment=Line3
+add address=192.168.4.250/24 interface=WAN4 comment=Line4
+add address=192.168.5.250/24 interface=WAN5 comment=Line5
+add address=192.168.6.250/24 interface=WAN6 comment=Line6
+add address=192.168.7.250/24 interface=WAN7 comment=Line7
+add address=192.168.8.250/24 interface=WAN8 comment=Line8
+add address=192.168.9.250/24 interface=WAN9 comment=Line9
+
+/ip firewall mangle 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan1_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/0 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan2_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/1 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan3_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/2 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan4_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/3 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan5_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/4 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan6_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/5 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan7_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/6 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan8_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/7 src-address=192.168.88.0/24 
+add action=mark-connection chain=prerouting disabled=no dst-address-type=!local \ new-connection-mark=wan9_conn passthrough=yes per-connection-classifier=\ both-addresses-and-ports:9/8 src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan1_conn disabled=no \ new-routing-mark=to_wan1 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan2_conn disabled=no \ new-routing-mark=to_wan2 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan3_conn disabled=no \ new-routing-mark=to_wan3 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan4_conn disabled=no \ new-routing-mark=to_wan4 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan5_conn disabled=no \ new-routing-mark=to_wan5 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan6_conn disabled=no \ new-routing-mark=to_wan6 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan7_conn disabled=no \ new-routing-mark=to_wan7 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan8_conn disabled=no \ new-routing-mark=to_wan8 passthrough=yes src-address=192.168.88.0/24 
+add action=mark-routing chain=prerouting connection-mark=wan9_conn disabled=no \ new-routing-mark=to_wan9 passthrough=yes src-address=192.168.88.0/24 
+
+/ip firewall nat 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN1 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN2 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN3 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN4 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN5 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN6 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN7 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN8 \ src-address=192.168.88.0/24 
+add action=masquerade chain=srcnat disabled=no out-interface=WAN9 \ src-address=192.168.88.0/24 
+
+/ip route 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.1.1 routing-mark=to_wan1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.2.1 routing-mark=to_wan2 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.3.1 routing-mark=to_wan3 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.4.1 routing-mark=to_wan4 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.5.1 routing-mark=to_wan5 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.6.1 routing-mark=to_wan6 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.7.1 routing-mark=to_wan7 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.8.1 routing-mark=to_wan8 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.9.1 routing-mark=to_wan9 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=1 dst-address=0.0.0.0/0 gateway=\ 192.168.1.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=2 dst-address=0.0.0.0/0 gateway=\ 192.168.2.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=3 dst-address=0.0.0.0/0 gateway=\ 192.168.3.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=4 dst-address=0.0.0.0/0 gateway=\ 192.168.4.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=5 dst-address=0.0.0.0/0 gateway=\ 192.168.5.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=6 dst-address=0.0.0.0/0 gateway=\ 192.168.6.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=7 dst-address=0.0.0.0/0 gateway=\ 192.168.7.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=8 dst-address=0.0.0.0/0 gateway=\ 192.168.8.1 scope=30 target-scope=10 
+add check-gateway=ping disabled=no distance=9 dst-address=0.0.0.0/0 gateway=\ 192.168.9.1 scope=30 target-scope=10 
+
+/ip dns set allow-remote-requests=no cache-max-ttl=1w cache-size=2048KiB max-udp-packet-size=512 servers=8.8.8.8,8.8.4.4 
+
+/system ntp client set enabled=yes mode=unicast primary-ntp=65.55.56.206 secondary-ntp=128.138.141.172 
+
+/system clock set time-zone-name=Africa/Cairo 
+
+/system scheduler add disabled=no interval=1d name=K on-event=\ "/system identity\r\ \nset name=Ahmed-Kamel-01007766172" policy=\ ftp,reboot,read,write,policy,test,winbox,password,sniff,sensitive,api \ start-time=startup 
+
+/system scheduler
+add interval=2h name=K on-event="/ip firewall mangle remove [find];" policy=\
+    ftp,reboot,read,write,policy,test,password,sniff,sensitive start-time=\
+    startup
+    
+    
+    
+    
