@@ -19,7 +19,6 @@ add comment="Blocked tube2017" name=tube2017 regexp="^.+(tube2017).*\$"
 add comment="Blocked gekso" name=gekso regexp="^.+(gekso).*\$"
 add comment="Blocked stripchat" name=stripchat regexp="^.+(stripchat).*\$"
 
-
 /ip firewall filter
 add action=drop chain=forward comment="Blocked xnxx" layer7-protocol=xnxx log=\
     yes log-prefix=xnxx
