@@ -1,0 +1,30 @@
+
+#DHCP-Server Name
+:local DHCPServer "dhcp1";
+
+:foreach i in=[/ip dhcp-server lease find dynamic=yes active-server=$DHCPServer] do={
+:local DhcpDynMAC [/ip dhcp-server lease get $i mac-address];
+:local DhcpDynCLIENTID [/ip dhcp-server lease get $i active-client-id];
+:local DhcpDynHOST [/ip dhcp-server lease get $i host-name];
+:local phoneNAME [:pick $DhcpDynHOST 0 4];
+
+#YouCanAddMorePhone
+:if ( ($phoneNAME="BLUS") || ($phoneNAME="iPad") || ($phoneNAME="vivo") || ($phoneNAME="HUAWEI") || ($phoneNAME="Redmi") || ($phoneNAME="IPHONE") || ($phoneNAME="Honor") || ($phoneNAME="OPPO") || ($phoneNAME="Galaxy") || ($phoneNAME="realme") || ($phoneNAME="andr") || ($phoneNAME="Andr") || ($phoneNAME="iPho") || ($phoneNAME="BLAC") ) do={
+/ip dhcp-server lease add block-access=yes mac-address="$DhcpDynMAC" use-src-mac=yes comment="$DhcpDynHOST" server="$DHCPServer" client-id="$DhcpDynCLIENTID";
+}
+}
+/ip dhcp-server lease remove [find dynamic=yes host-name~"BLUS*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"android*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"Android*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"iPad*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"vivo*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"HUAWEI*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"Redmi*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"IPHONE*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"Honor*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"OPPO*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"Galaxy*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"realme*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"iPhone*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"BLACKBERRY*"]
+
