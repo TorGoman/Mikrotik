@@ -28,3 +28,6 @@
 /ip dhcp-server lease remove [find dynamic=yes host-name~"iPhone*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"BLACKBERRY*"]
 
+delay delay-time=10
+
+/ip dhcp-server lease remove [find dynamic status=conflict];
