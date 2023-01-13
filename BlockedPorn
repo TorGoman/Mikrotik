@@ -5,13 +5,11 @@ add comment="Blocked porn" name=porn regexp="^.+(porn).*\$"
 add comment="Blocked sex" name=sex regexp="^.+(sex).*\$"
 add comment="Blocked arbada" name=arbada regexp="^.+(arbada).*\$"
 add comment="Blocked arabxn" name=arabxn regexp="^.+(arabxn).*\$"
-add comment="Blocked trend-arabic" name=trend-arabic regexp=\
-    "^.+(trend-arabic).*\$"
+add comment="Blocked trend-arabic" name=trend-arabic regexp="^.+(trend-arabic).*\$"
 add comment="Blocked zebawy" name=zebawy regexp="^.+(zebawy).*\$"
 add comment="Blocked arabx" name=arabx regexp="^.+(arabx).*\$"
 add comment="Blocked xxx" name=xxx regexp="^.+(xxx).*\$"
-add comment="Blocked aflamaljins" name=aflamaljins regexp=\
-    "^.+(aflamaljins).*\$"
+add comment="Blocked aflamaljins" name=aflamaljins regexp="^.+(aflamaljins).*\$"
 add comment="Blocked adrak" name=adrak regexp="^.+(adrak).*\$"
 add comment="Blocked 3gpjizz" name=3gpjizz regexp="^.+(3gpjizz).*\$"
 add comment="Blocked xhamster" name=xhamster regexp="^.+(xhamster).*\$"
@@ -20,34 +18,20 @@ add comment="Blocked gekso" name=gekso regexp="^.+(gekso).*\$"
 add comment="Blocked stripchat" name=stripchat regexp="^.+(stripchat).*\$"
 
 /ip firewall filter
-add action=drop chain=forward comment="Blocked xnxx" layer7-protocol=xnxx log=\
-    yes log-prefix=xnxx
-add action=drop chain=forward comment="Blocked xvideos" layer7-protocol=xvideos \
-    log=yes log-prefix=xvideos
-add action=drop chain=forward comment="Blocked porn" layer7-protocol=porn log=\
-    yes log-prefix=porn
-add action=drop chain=forward comment="Blocked sex" layer7-protocol=sex log=yes \
-    log-prefix=sex
-add action=drop chain=forward comment="Blocked arbada" layer7-protocol=arbada \
-    log=yes log-prefix=arbada
-add action=drop chain=forward comment="Blocked arabxn" layer7-protocol=arabxn \
-    log=yes log-prefix=arabxn
-add action=drop chain=forward comment="Blocked trend-arabic" layer7-protocol=\
-    trend-arabic log=yes log-prefix=trend-arabic
-add action=drop chain=forward comment="Blocked zebawy" layer7-protocol=zebawy \
-    log=yes log-prefix=zebawy
-add action=drop chain=forward comment="Blocked arabx" layer7-protocol=arabx \
-    log=yes log-prefix=arabx
-add action=drop chain=forward comment="Blocked xxx" layer7-protocol=xxx log=yes \
-    log-prefix=xxx
-add action=drop chain=forward comment="Blocked aflamaljins" layer7-protocol=\
-    aflamaljins
-add action=drop chain=forward comment="Blocked adrak" layer7-protocol=adrak
-add action=drop chain=forward comment="Blocked 3gpjizz" layer7-protocol=3gpjizz
-add action=drop chain=forward comment="Blocked xhamster" layer7-protocol=\
-    xhamster
-add action=drop chain=forward comment="Blocked tube2017" layer7-protocol=\
-    tube2017
-add action=drop chain=forward comment="Blocked gekso" layer7-protocol=gekso
-add action=drop chain=forward comment="Blocked stripchat" layer7-protocol=\
-    stripchat
+add action=drop chain=forward comment="Blocked xnxx" layer7-protocol=xnxx log=yes log-prefix=xnxx
+add action=drop chain=forward comment="Blocked xvideos" layer7-protocol=xvideos log=yes log-prefix=xvideos
+add action=drop chain=forward comment="Blocked porn" layer7-protocol=porn log=yes log-prefix=porn
+add action=drop chain=forward comment="Blocked sex" layer7-protocol=sex log=yes log-prefix=sex
+add action=drop chain=forward comment="Blocked arbada" layer7-protocol=arbada log=yes log-prefix=arbada
+add action=drop chain=forward comment="Blocked arabxn" layer7-protocol=arabxn log=yes log-prefix=arabxn
+add action=drop chain=forward comment="Blocked trend-arabic" layer7-protocol=trend-arabic log=yes log-prefix=trend-arabic
+add action=drop chain=forward comment="Blocked zebawy" layer7-protocol=zebawy log=yes log-prefix=zebawy
+add action=drop chain=forward comment="Blocked arabx" layer7-protocol=arabx log=yes log-prefix=arabx
+add action=drop chain=forward comment="Blocked xxx" layer7-protocol=xxx log=yes log-prefix=xxx
+add action=drop chain=forward comment="Blocked aflamaljins" layer7-protocol=aflamaljins log=yes log-prefix=aflamaljins
+add action=drop chain=forward comment="Blocked adrak" layer7-protocol=adrak log=yes log-prefix=adrak
+add action=drop chain=forward comment="Blocked 3gpjizz" layer7-protocol=3gpjizz log=yes log-prefix=3gpjizz
+add action=drop chain=forward comment="Blocked xhamster" layer7-protocol=xhamster log=yes log-prefix=xhamster
+add action=drop chain=forward comment="Blocked tube2017" layer7-protocol=tube2017 log=yes log-prefix=tube2017
+add action=drop chain=forward comment="Blocked gekso" layer7-protocol=gekso log=yes log-prefix=gekso
+add action=drop chain=forward comment="Blocked stripchat" layer7-protocol=stripchat log=yes log-prefix=stripchat
