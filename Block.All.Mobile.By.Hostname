@@ -6,10 +6,10 @@
 :local DhcpDynMAC [/ip dhcp-server lease get $i mac-address];
 :local DhcpDynCLIENTID [/ip dhcp-server lease get $i active-client-id];
 :local DhcpDynHOST [/ip dhcp-server lease get $i host-name];
-:local phoneNAME [:pick $DhcpDynHOST 0 4];
+:local phoneNAME [:pick $DhcpDynHOST 0 6];
 
 #YouCanAddMorePhone
-:if ( ($phoneNAME="BLUS") || ($phoneNAME="iPad") || ($phoneNAME="vivo") || ($phoneNAME="HUAWEI") || ($phoneNAME="Redmi") || ($phoneNAME="IPHONE") || ($phoneNAME="Honor") || ($phoneNAME="OPPO") || ($phoneNAME="Galaxy") || ($phoneNAME="realme") || ($phoneNAME="andr") || ($phoneNAME="Andr") || ($phoneNAME="iPho") || ($phoneNAME="BLAC") ) do={
+:if ( ($phoneNAME="BLUS") || ($phoneNA ME="iPad") || ($phoneNAME="M2") || ($phoneNAME="vivo") || ($phoneNAME="HUAWEI") || ($phoneNAME="Redmi") || ($phoneNAME="IPHONE") || ($phoneNAME="Honor") || ($phoneNAME="OPPO") || ($phoneNAME="Galaxy") || ($phoneNAME="realme") || ($phoneNAME="andr") || ($phoneNAME="Andr") || ($phoneNAME="iPho") || ($phoneNAME="BLAC") ) do={
 /ip dhcp-server lease add block-access=yes mac-address="$DhcpDynMAC" use-src-mac=yes comment="$DhcpDynHOST" server="$DHCPServer" client-id="$DhcpDynCLIENTID";
 }
 }
@@ -17,6 +17,7 @@
 /ip dhcp-server lease remove [find dynamic=yes host-name~"android*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"Android*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"iPad*"]
+/ip dhcp-server lease remove [find dynamic=yes host-name~"M2*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"vivo*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"HUAWEI*"]
 /ip dhcp-server lease remove [find dynamic=yes host-name~"Redmi*"]
