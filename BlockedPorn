@@ -17,6 +17,7 @@ add comment="Blocked tube2017" name=tube2017 regexp="^.+(tube2017).*\$"
 add comment="Blocked gekso" name=gekso regexp="^.+(gekso).*\$"
 add comment="Blocked stripchat" name=stripchat regexp="^.+(stripchat).*\$"
 
+
 /ip firewall filter
 add action=drop chain=forward comment="Blocked xnxx" layer7-protocol=xnxx log=yes log-prefix=xnxx
 add action=drop chain=forward comment="Blocked xvideos" layer7-protocol=xvideos log=yes log-prefix=xvideos
@@ -35,3 +36,27 @@ add action=drop chain=forward comment="Blocked xhamster" layer7-protocol=xhamste
 add action=drop chain=forward comment="Blocked tube2017" layer7-protocol=tube2017 log=yes log-prefix=tube2017
 add action=drop chain=forward comment="Blocked gekso" layer7-protocol=gekso log=yes log-prefix=gekso
 add action=drop chain=forward comment="Blocked stripchat" layer7-protocol=stripchat log=yes log-prefix=stripchat
+
+mikrotik v5.26 
+
+/ip firewall filter
+add action=drop chain=forward comment="Blocked xnxx" layer7-protocol=xnxx 
+add action=drop chain=forward comment="Blocked xvideos" layer7-protocol=xvideos 
+add action=drop chain=forward comment="Blocked porn" layer7-protocol=porn
+add action=drop chain=forward comment="Blocked sex" layer7-protocol=sex
+add action=drop chain=forward comment="Blocked arbada" layer7-protocol=arbada 
+add action=drop chain=forward comment="Blocked arabxn" layer7-protocol=arabxn 
+add action=drop chain=forward comment="Blocked trend-arabic" layer7-protocol=trend-arabic 
+add action=drop chain=forward comment="Blocked zebawy" layer7-protocol=zebawy
+add action=drop chain=forward comment="Blocked arabx" layer7-protocol=arabx
+add action=drop chain=forward comment="Blocked xxx" layer7-protocol=xxx
+add action=drop chain=forward comment="Blocked aflamaljins" layer7-protocol=aflamaljins 
+add action=drop chain=forward comment="Blocked adrak" layer7-protocol=adrak 
+add action=drop chain=forward comment="Blocked 3gpjizz" layer7-protocol=3gpjizz 
+add action=drop chain=forward comment="Blocked xhamster" layer7-protocol=xhamster
+add action=drop chain=forward comment="Blocked tube2017" layer7-protocol=tube2017
+add action=drop chain=forward comment="Blocked gekso" layer7-protocol=gekso
+add action=drop chain=forward comment="Blocked stripchat" layer7-protocol=stripchat
+
+
+
