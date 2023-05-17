@@ -1,1 +1,1 @@
-[/ip address get [find interface="$inetinterface" disabled=no] address]
+/ip address get [find interface="$inetinterface" disabled=no] address
