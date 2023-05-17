@@ -1,1 +1,1 @@
-pppoe-out-ip
+[/ip address get [find interface="$inetinterface" disabled=no] address]
