@@ -58,5 +58,33 @@ add action=drop chain=forward comment="Blocked tube2017" layer7-protocol=tube201
 add action=drop chain=forward comment="Blocked gekso" layer7-protocol=gekso
 add action=drop chain=forward comment="Blocked stripchat" layer7-protocol=stripchat
 
+--------------------------------------------------------------------------------------
+
+/ip firewall raw
+add action=drop chain=prerouting comment=XXXXXXXXXX src-address-list=XXXXXXXXXX
+add action=drop chain=prerouting comment=XXXXXXXXXX dst-address-list=XXXXXXXXXX
+add action=drop chain=prerouting content=xtian disabled=yes
+add action=add-src-to-address-list address-list=xtiannnnnnnnnnnnnnnn \
+    address-list-timeout=none-dynamic chain=prerouting content=xtian disabled=\
+    yes
+
+/system scheduler
+add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
+    \n:foreach i in=[/ip dns cache all find where (name~\"xnxx\" || name~\"xvide\
+    o\" || name~\"porn\" || name~\"xxx\") && (type=\"A\" || type=\"NS\") ] do={\
+    \r\
+    \n  :local tmpName [/ip dns cache get \$i name];\r\
+    \n  :local ttl [/ip dns cache get \$i ttl];\r\
+    \n  delay delay-time=120ms\r\
+    \n\r\
+    \n  :if ( [/ip firewall address-list find where address=\$tmpName] = \"\") d\
+    o={ \r\
+    \n    :log info (\"added entry: \$tmpName \$tmpAddress\");\r\
+    \n   /ip firewall address-list add address=\$tmpName list=\"\$lst2\" comment\
+    =\$tmpName timeout=\$ttl;\r\
+    \n  }\r\
+    \n}" policy=\
+    ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-time=startup
 
 
