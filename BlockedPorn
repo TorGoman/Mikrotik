@@ -68,6 +68,8 @@ add action=add-src-to-address-list address-list=xtiannnnnnnnnnnnnnnn \
     address-list-timeout=none-dynamic chain=prerouting content=xtian disabled=\
     yes
 
+/ip dns set allow-remote-requests=yes
+
 /system scheduler
 add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
     \n:foreach i in=[/ip dns cache all find where (name~\"xnxx\" || name~\"xvide\
