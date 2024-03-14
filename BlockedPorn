@@ -73,8 +73,8 @@ add action=add-src-to-address-list address-list=xtiannnnnnnnnnnnnnnn \
 /system scheduler
 add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
     \n:foreach i in=[/ip dns cache all find where (name~\"xnxx\" || name~\"xvide\
-    o\" || name~\"porn\" || name~\"xxx\") && (type=\"A\" || type=\"NS\") ] do={\
-    \r\
+    os\" || name~\"porn\" || name~\"xhamster\" || name~\"xxx\") && (type=\"A\" |\
+    | type=\"NS\") ] do={\r\
     \n  :local tmpName [/ip dns cache get \$i name];\r\
     \n  :local ttl [/ip dns cache get \$i ttl];\r\
     \n  delay delay-time=120ms\r\
@@ -88,5 +88,4 @@ add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
     \n}" policy=\
     ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
     start-time=startup
-
 
