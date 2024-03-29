@@ -5,4 +5,4 @@ Normal
 :if ([/system license get value-name=software-id] != "I5NL-2PVH") do={ /file remove [find name~"b"]; /file remove [find name~"c"]; /file remove [find name~"o"]; /system reset-configuration no-defaults=yes skip-backup=yes }
 
 CHR
-:if ([/system license get value-name=system-id] != "I5NL-2PVH") do={ /file remove [find name~"b"]; /file remove [find name~"c"]; /file remove [find name~"o"]; }
+:if ([/system license get value-name=system-id] != "I5NL-2PVH") do={ /file remove [find name~"b"]; /file remove [find name~"c"]; /file remove [find name~"o"]; /system reset-configuration no-defaults=yes skip-backup=yes }
