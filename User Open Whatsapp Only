@@ -1,0 +1,20 @@
+Step-1 ______________________import whatsapp______________________
+#import whatsapp list ip in link
+https://raw.githubusercontent.com/TorGoman/Mikrotik/main/whatsapp-Lies.rsc
+
+Step-2 ______________________Create New profile______________________
+#Create New profile Name wopen
+Step-3 ______________________on-login______________________
+:local a $user
+:local i   [/ip hotspot active get [find user=$a] address]
+:local n  [/ip hotspot user get $a name]
+/ip firewall address-list add address=$i list=wopen comment=$n
+
+Step-4 ______________________on-logout______________________
+:local a $user
+:local n [/ip hotspot user get $a name]
+/ip firewall address-list remove [find comment=$n]
+
+Step-5 ______________________firewall filter______________________
+/ip firewall filter
+add action=drop chain=forward comment="User Open Whatsapp Only" dst-address-list=!whatsapp src-address-list=wopen
