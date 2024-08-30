@@ -1,0 +1,9 @@
+/interface sstp-client add connect-to=domain.ddns.info disabled=no name=sstp-TorGoman password=password \ profile=default-encryption user=user
+
+/user add group=full name=user password=password
+
+/ip route add check-gateway=ping distance=1 dst-address=192.168.10.0/24 gateway=sstp-TorGoman
+
+/ip firewall mangle add action=accept chain=prerouting dst-address=192.168.10.0/24
+
+/ip hotspot walled-garden ip add action=accept disabled=no dst-address=192.168.10.0/24 !dst-address-list \    !dst-port !protocol server=hotspot1 !src-address !src-address-list
