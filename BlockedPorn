@@ -66,22 +66,17 @@ add action=drop chain=prerouting comment=XXXXXXXXXX dst-address-list=XXXXXXXXXX
 
 /ip dns set allow-remote-requests=yes
 
-/system scheduler
-add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
-    \n:foreach i in=[/ip dns cache all find where (name~\"xnxx\" || name~\"xvide\
-    os\" || name~\"porn\" || name~\"xhamster\" || name~\"xxx\") && (type=\"A\" |\
-    | type=\"NS\") ] do={\r\
+/system scheduler add interval=5m name=XXXXXXXXXX on-event=":global lst2 \"XXXXXXXXXX\";\r\
+    \n:foreach i in=[/ip dns cache all find where (name~\"xnxx\" || name~\"xvideos\" || name~\"porn\" || name~\"xhamster\" || name~\"redtube\"|| name~\"x\
+    xx\") && (type=\"A\" || type=\"NS\") ] do={\r\
     \n  :local tmpName [/ip dns cache get \$i name];\r\
     \n  :local ttl [/ip dns cache get \$i ttl];\r\
     \n  delay delay-time=120ms\r\
     \n\r\
-    \n  :if ( [/ip firewall address-list find where address=\$tmpName] = \"\") d\
-    o={ \r\
+    \n  :if ( [/ip firewall address-list find where address=\$tmpName] = \"\") do={ \r\
     \n    :log info (\"added entry: \$tmpName \$tmpAddress\");\r\
-    \n   /ip firewall address-list add address=\$tmpName list=\"\$lst2\" comment\
-    =\$tmpName timeout=\$ttl;\r\
+    \n   /ip firewall address-list add address=\$tmpName list=\"\$lst2\" comment=\$tmpName timeout=\$ttl;\r\
     \n  }\r\
-    \n}" policy=\
-    ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
-    start-time=startup
+    \n}" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon start-time=startup
+
 
