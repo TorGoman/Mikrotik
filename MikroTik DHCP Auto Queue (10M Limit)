@@ -1,0 +1,14 @@
+# Add this script in (ip dhcp-server dhcp1 lease-script)
+
+:local queueLimit "10M/10M"
+:local dhcpLeases [/ip dhcp-server lease find]
+:foreach lease in=$dhcpLeases do={
+    :local ipAddr [/ip dhcp-server lease get $lease address]
+    :local clientMac [/ip dhcp-server lease get $lease mac-address]
+    :local queueName "Client-$ipAddr"
+
+    :if ([/queue simple find name=$queueName] = "") do={
+        /queue simple add name=$queueName target=$ipAddr max-limit=$queueLimit
+        :log info "Added $ipAddr to Simple Queue with limit $queueLimit"
+    }
+}
