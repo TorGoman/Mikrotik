@@ -1,3 +1,5 @@
+Mikrotik v6
+
 /ip firewall layer7-protocol
 add comment="Blocked xnxx" name=xnxx regexp="^.+(xnxx).*\$"
 add comment="Blocked xvideos" name=xvideos regexp="^.+(xvideos).*\$"
@@ -79,4 +81,44 @@ add action=drop chain=prerouting comment=XXXXXXXXXX dst-address-list=XXXXXXXXXX
     \n  }\r\
     \n}" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon start-time=startup
 
+
+
+--------------------------------------------------------------------------------------
+
+mikrotik v7
+
+/system scheduler add interval=1m name=Run_DNS_Block on-event=DNS_Block_Script start-time=startup
+
+/ip dns set allow-remote-requests=yes
+
+/system script add name=DNS_Block_Script policy=read,write,test source={
+    :local lst2 "DROP_LIST";
+    :foreach i in=[/ip dns cache find where (name~"(xnxx|xvideos|pornhub|xhamster|redtube|youporn|spankbang|eporner|beeg|chaturbate|stripchat|bongacams|livejasmin|brazzers|tubegalore|tnaflix|motherless|hentai|rule34|erome|porn|xxx|nude|nsfw)") and (type="A" or type="AAAA")] do={
+        :local tmpName [/ip dns cache get $i name];
+        :local ttl [/ip dns cache get $i ttl];
+        :delay 30ms;
+        :if ([:len [/ip firewall address-list find where address=$tmpName and list=$lst2]] = 0) do={
+            :log info ("Added Blocked Site: " . $tmpName);
+            /ip firewall address-list add address=$tmpName list=$lst2 comment=$tmpName timeout=$ttl;
+        }
+    }
+}
+
+
+/ip firewall raw
+add action=drop chain=prerouting comment="Drop Blocked Sites" src-address-list=DROP_LIST
+add action=drop chain=prerouting comment="Drop Blocked Sites" dst-address-list=DROP_LIST
+
+
+
+/ip firewall nat
+add action=redirect chain=dstnat comment="Force DNS UDP" dst-port=53 protocol=udp to-ports=53
+add action=redirect chain=dstnat comment="Force DNS TCP" dst-port=53 protocol=tcp to-ports=53
+
+
+
+
+/ip firewall filter
+add action=drop chain=forward comment="Block DoT" dst-port=853 protocol=tcp
+add action=drop chain=forward comment="Block DoT" dst-port=853 protocol=udp
 
