@@ -106,19 +106,18 @@ mikrotik v7
 
 
 /ip firewall raw
-add action=drop chain=prerouting comment="Drop Blocked Sites" src-address-list=DROP_LIST
-add action=drop chain=prerouting comment="Drop Blocked Sites" dst-address-list=DROP_LIST
+add action=drop chain=prerouting comment="Drop Blocked Sites (dst)" dst-address-list=DROP_LIST place-before=0
+add action=drop chain=prerouting comment="Drop Blocked Sites (src)" src-address-list=DROP_LIST place-before=0
 
 
 
 /ip firewall nat
-add action=redirect chain=dstnat comment="Force DNS UDP" dst-port=53 protocol=udp to-ports=53
-add action=redirect chain=dstnat comment="Force DNS TCP" dst-port=53 protocol=tcp to-ports=53
-
+add action=redirect chain=dstnat comment="Force DNS TCP" dst-port=53 protocol=tcp to-ports=53 place-before=0
+add action=redirect chain=dstnat comment="Force DNS UDP" dst-port=53 protocol=udp to-ports=53 place-before=0
 
 
 
 /ip firewall filter
-add action=drop chain=forward comment="Block DoT" dst-port=853 protocol=tcp
-add action=drop chain=forward comment="Block DoT" dst-port=853 protocol=udp
+add action=drop chain=forward comment="Block DoT TCP" dst-port=853 protocol=tcp place-before=0
+add action=drop chain=forward comment="Block DoT UDP" dst-port=853 protocol=udp place-before=0
 
