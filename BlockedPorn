@@ -121,3 +121,27 @@ add action=redirect chain=dstnat comment="Force DNS UDP" dst-port=53 protocol=ud
 add action=drop chain=forward comment="Block DoT TCP" dst-port=853 protocol=tcp place-before=0
 add action=drop chain=forward comment="Block DoT UDP" dst-port=853 protocol=udp place-before=0
 
+
+/ip dns adlist add url="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts" ssl-verify=no
+
+
+/ip dns static
+add regexp="(xnxx|xvideos|pornhub|xhamster)" type=NXDOMAIN
+add regexp="(redtube|youporn|spankbang|eporner)" type=NXDOMAIN
+add regexp="(chaturbate|stripchat|bongacams|livejasmin)" type=NXDOMAIN
+add regexp="(brazzers|tubegalore|tnaflix|motherless)" type=NXDOMAIN
+add regexp="(hentai|rule34|erome|beeg)" type=NXDOMAIN
+add regexp="(porn|xxx|nude|nsfw)" type=NXDOMAIN
+
+
+/ip dns static
+add name=dns.google type=NXDOMAIN
+add name=cloudflare-dns.com type=NXDOMAIN
+add name=one.one.one.one type=NXDOMAIN
+add name=dns.quad9.net type=NXDOMAIN
+add name=doh.cleanbrowsing.org type=NXDOMAIN
+
+
+
+
+
